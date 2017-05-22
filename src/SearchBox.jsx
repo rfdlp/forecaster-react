@@ -11,18 +11,15 @@ class SearchBox extends Component {
     }
   }
 
-  search(event){
+  async search(event){
     event.preventDefault();
     const BASE_URL = 'http://api.openweathermap.org/data/2.5/forecast/daily?q=';
     const FETCH_URL = BASE_URL + this.state.query + "&units=metric&cnt=16&appid=ba68e2c43979c6eabbd33ff8e32c0611"
 
-    fetch(FETCH_URL, {
-      method: 'GET'
-    })
-    .then(response => response.json())
-    .then(json => {
-      this.setState({json})
-    })
+    const response = await fetch(FETCH_URL);
+    const json = await response.json();
+    
+    this.setState({ json });
   }
 
   render(){
